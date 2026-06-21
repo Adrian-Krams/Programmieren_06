@@ -1,0 +1,27 @@
+Aufgabe 4 – Vergleich Visitor-Pattern und Pattern Matching
+
+Für die Erzeugung des AST wurden zwei verschiedene Ansätze umgesetzt:
+der AST-Builder mit Visitor-Pattern sowie der AST-Builder mit manueller
+Traversierung und Pattern Matching.
+
+Der Visitor-Builder basiert auf den von ANTLR generierten Visitor-Klassen.
+Jede Grammatikregel besitzt eine eigene Besuchsmethode. Beim Traversieren
+des Parse-Trees werden die erzeugten Teilergebnisse auf Stacks gespeichert
+und anschließend zu größeren AST-Knoten zusammengesetzt. Der Vorteil dieses
+Ansatzes liegt in der guten Integration mit ANTLR und der klaren Trennung
+der Verarbeitungsschritte. Nachteilig ist der höhere Implementierungsaufwand,
+da zusätzliche Datenstrukturen wie Stacks benötigt werden und der Builder
+einen internen Zustand verwaltet.
+
+Der Pattern-Builder verwendet keine Stacks und keinen internen Zustand.
+Stattdessen werden die Teilbäume direkt über Rückgabewerte der Methoden
+erzeugt und zusammengesetzt. Dadurch ist der Code oft einfacher lesbar
+und leichter nachvollziehbar. Außerdem entstehen weniger Hilfsstrukturen.
+Ein Nachteil ist, dass die Traversierung stärker an die konkrete Struktur
+des Parse-Trees gekoppelt ist und bei Änderungen der Grammatik häufiger
+angepasst werden muss.
+
+Zusammenfassend eignet sich das Visitor-Pattern besonders für größere
+Compiler- und Parserprojekte, da es gut mit den von ANTLR erzeugten
+Klassen zusammenarbeitet. Der Pattern-Matching-Ansatz ist dagegen
+kompakter und für kleinere Projekte häufig leichter verständlich.
